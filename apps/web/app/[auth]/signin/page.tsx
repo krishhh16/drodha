@@ -70,7 +70,7 @@ export default function SignInPage() {
             <Input
               id="email"
               type="email"
-              placeholder="m@example.com"
+              placeholder="user@example.com"
               {...form.register("email")}
             />
             {form.formState.errors.email && (

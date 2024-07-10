@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import axios from 'axios'
 import {
   Card,
   CardContent,
@@ -24,6 +25,7 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters long.",
   }),
+  username: z.string()
 })
 
 export default function SignInPage() {
@@ -35,6 +37,7 @@ export default function SignInPage() {
     defaultValues: {
       email: "",
       password: "",
+      username: ""
     },
   })
 
@@ -42,10 +45,13 @@ export default function SignInPage() {
     setIsLoading(true)
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      console.log(values)
-      // If sign-in is successful, redirect to dashboard
+      const response = await axios.post("http://localhost:3000/signup", form)
+      
+      if (!response.data.success){
+        alert(response.data.msg)
+        return
+      }
+      
       router.push('/dashboard')
     } catch (error) {
       console.error(error)
@@ -65,6 +71,18 @@ export default function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
+        <div className="grid gap-2">
+            <Label htmlFor="email">User Name</Label>
+            <Input
+              id="username"
+              type="username"
+              placeholder="John Doe"
+              {...form.register("username")}
+            />
+            {form.formState.errors.username && (
+              <p className="text-sm text-red-500">{form.formState.errors.username.message}</p>
+            )}
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
