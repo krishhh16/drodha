@@ -18,7 +18,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-const formSchema = z.object({
+export const signupformSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -31,9 +31,8 @@ const formSchema = z.object({
 export default function SignInPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signupformSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -41,11 +40,12 @@ export default function SignInPage() {
     },
   })
 
+
   async function onSubmit(values: any) {
     setIsLoading(true)
 
     try {
-      const response = await axios.post("http://localhost:3000/signup", form)
+      const response = await axios.post("http://localhost:3000/api/signup", form)
       
       if (!response.data.success){
         alert(response.data.msg)
@@ -56,7 +56,7 @@ export default function SignInPage() {
     } catch (error) {
       console.error(error)
       // Handle sign-in error
-    } finally {
+    } finally { 
       setIsLoading(false)
     }
   }
