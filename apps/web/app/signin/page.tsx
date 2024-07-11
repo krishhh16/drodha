@@ -5,12 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from 'axios'
+import { signinFormSchema } from '../api/signin/route';
+import { useRouter } from 'next/router';
+
 
 const SignupForm = () => {
+  const navigator = useRouter()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [errMsg, setErrMsg] = useState("")
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -20,13 +25,28 @@ const SignupForm = () => {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const setError = (errMessage: string) => {
+    setErrMsg(errMessage)
+      setTimeout(() => {
+        setErrMsg("")
+      }, 5000)
+  }
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // check if the password and confirm password are the same
     // do zod validation
+    if(!signinFormSchema.safeParse(formData).success){
+      setError("Please put valid inputs in the input fields")
+    }
     // send to the backend
+    const response = await axios.post('http://localhost:3000/api/signup')
     // check if it was a success or not
+    if (!response.data.success){
+      setError(response.data.msg)
+    }
     // if success, redirect to the dashboard
+    else {
+      navigator.push("/dashboard")
+    }
     // Add form submission logic here
     console.log('Form submitted:', formData);
   };

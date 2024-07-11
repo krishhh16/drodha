@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 import z from "zod"
 const jwtSecret = 'something'
 
-const signinFormSchema = z.object({
+export const signinFormSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8)
 }) 
