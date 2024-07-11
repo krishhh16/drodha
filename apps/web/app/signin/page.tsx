@@ -1,100 +1,64 @@
-"use client"
+'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import * as z from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import axios from 'axios'
 
-export const signinformSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long.",
-  }),
-})
+const SignupForm = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-export default function SignInPage() {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
-  const form = useForm({
-    resolver: zodResolver(signinformSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  })
-
-  async function onSubmit(values: any) {
-    setIsLoading(true)
-
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      console.log(values)
-      // If sign-in is successful, redirect to dashboard
-      router.push('/dashboard')
-    } catch (error) {
-      console.error(error)
-      // Handle sign-in error
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    // check if the password and confirm password are the same
+    // do zod validation
+    // send to the backend
+    // check if it was a success or not
+    // if success, redirect to the dashboard
+    // Add form submission logic here
+    console.log('Form submitted:', formData);
+  };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-[350px]">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Sign in</CardTitle>
-          <CardDescription>
-            Enter your email and password to sign in
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="user@example.com"
-              {...form.register("email")}
-            />
-            {form.formState.errors.email && (
-              <p className="text-sm text-red-500">{form.formState.errors.email.message}</p>
-            )}
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              {...form.register("password")}
-            />
-            {form.formState.errors.password && (
-              <p className="text-sm text-red-500">{form.formState.errors.password.message}</p>
-            )}
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button className="w-full" onClick={form.handleSubmit(onSubmit)} disabled={isLoading}>
-            Sign In
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
-  )
-}
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Signup</h2>
+      <div className="mb-4">
+        <Label htmlFor="email">Email</Label>
+        <Input 
+          type="email" 
+          id="email" 
+          name="email" 
+          value={formData.email} 
+          onChange={handleChange} 
+          required 
+        />
+      </div>
+      <div className="mb-4">
+        <Label htmlFor="password">Password</Label>
+        <Input 
+          type="password" 
+          id="password" 
+          name="password" 
+          value={formData.password} 
+          onChange={handleChange} 
+          required 
+        />
+      </div>
+      <Button type="submit" className="w-full">Signup</Button>
+    </form>
+  );
+};
+
+export default SignupForm;

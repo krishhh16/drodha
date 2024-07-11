@@ -2,8 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@repo/db/prismaClient"
 import {cookies} from "next/headers"
 import jwt from "jsonwebtoken"
-import { signinformSchema } from "@/app/signin/page";
+import z from "zod"
 const jwtSecret = 'something'
+
+const signinFormSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8)
+}) 
 
 export async function POST(req: NextRequest){
     // Destructure the body parameter
@@ -18,7 +23,7 @@ export async function POST(req: NextRequest){
 
     //Check if the user has sent an empty values OR the inputs aren't valid
 
-    if (!(email || password) || !signinformSchema.safeParse({email, password}).success){
+    if (!(email || password) || !signinFormSchema.safeParse({email, password}).success){
         return NextResponse.json({msg: "Please provide valid inputs", success: false})
     }
     // Check if the user with the same email exists on the data

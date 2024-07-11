@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@repo/db/prismaClient"
 import {cookies} from "next/headers"
+import z from 'zod'
 import jwt from "jsonwebtoken"
-import { signupformSchema } from "@/app/signup/page";
 const jwtSecret = 'something'
 
+const signupFormSchema = z.object({
+    username: z.string(),
+    email: z.string().email(),
+    password: z.string().min(8)
+})
 export async function POST(req: NextRequest){
     const {
         username,
@@ -18,7 +23,7 @@ export async function POST(req: NextRequest){
 
     //Check if the user has sent an empty values OR the inputs aren't valid
 
-    if (!(username || email || password) || !signupformSchema.safeParse({username, email, password}).success){
+    if (!(username || email || password) || !signupFormSchema.safeParse({username, email, password}).success){
         return NextResponse.json({msg: "Please provide valid inputs", success: false})
     }
     // Check if the user with the similar email exists on the data
