@@ -5,17 +5,17 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from 'axios'
-import { signinFormSchema } from '../api/signin/route';
+import z from "zod"
+import {signinFormSchema, signinType } from '@repo/zodtypes/auth'
 import { useRouter } from 'next/router';
 
-
 const SignupForm = () => {
-  const navigator = useRouter()
-  const [formData, setFormData] = useState({
+  // const navigator = useRouter()
+  const [formData, setFormData] = useState<signinType>({
     email: '',
     password: ''
   });
-  const [errMsg, setErrMsg] = useState("")
+  const [errMsg, setErrMsg] = useState<string>("")
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -33,22 +33,20 @@ const SignupForm = () => {
   }
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    // do zod validation
-    if(!signinFormSchema.safeParse(formData).success){
+    const form = signinFormSchema.parse(formData);
+    if(!false){
       setError("Please put valid inputs in the input fields")
     }
     // send to the backend
-    const response = await axios.post('http://localhost:3000/api/signup')
+    const response = await axios.post('http://localhost:3000/api/signin', form)
     // check if it was a success or not
     if (!response.data.success){
       setError(response.data.msg)
     }
     // if success, redirect to the dashboard
     else {
-      navigator.push("/dashboard")
+      // navigator.push("/dashboard")
     }
-    // Add form submission logic here
-    console.log('Form submitted:', formData);
   };
 
   return (

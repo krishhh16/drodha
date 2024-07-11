@@ -2,24 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@repo/db/prismaClient"
 import {cookies} from "next/headers"
 import z from 'zod'
+import { signupFormSchema, signupType } from "@repo/zodtypes/auth";
 import jwt from "jsonwebtoken"
 const jwtSecret = 'something'
 
-export const signupFormSchema = z.object({  
-    username: z.string(),
-    email: z.string().email(),
-    password: z.string().min(8)
-})
 export async function POST(req: NextRequest){
     const {
         username,
         email,
         password
-    } : {
-        username: string,
-        email: string,
-        password: string 
-    } = await req.json()
+    } : signupType = await req.json()
 
     //Check if the user has sent an empty values OR the inputs aren't valid
 

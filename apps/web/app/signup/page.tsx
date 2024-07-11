@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from 'axios'
-import { signupFormSchema } from '../api/signup/route';
 import { useRouter } from 'next/router';
+import { signupFormSchema, signupType } from '@repo/zodtypes/auth';
 
+interface signupInputs extends signupType {
+  confirmPassword: string
+}
 const SignupForm = () => {
   const navigator = useRouter()
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<signupInputs>({
     username: '',
     email: '',
     password: '',
@@ -35,12 +38,13 @@ const SignupForm = () => {
 
    const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const {email , username, password} = formData
     // check if the password and confirm password are the same
     if (formData.password !== formData.confirmPassword){
       setError("The password and the confirm Password are not the same!!")
     }
     // do zod validation
-    else if(!signupFormSchema.safeParse(formData).success){
+    else if(!signupFormSchema.safeParse({username, email, password}).success){
       setError("Please put valid inputs in the input fields")
     }
     // send to the backend

@@ -3,23 +3,16 @@ import prisma from "@repo/db/prismaClient"
 import {cookies} from "next/headers"
 import jwt from "jsonwebtoken"
 import z from "zod"
-const jwtSecret = 'something'
+import { signinFormSchema, signinType } from "@repo/zodtypes/auth";
 
-export const signinFormSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(8)
-}) 
+const jwtSecret = 'something'
 
 export async function POST(req: NextRequest){
     // Destructure the body parameter
     const {
         email,
         password
-    } : {
-        username: string,
-        email: string,
-        password: string 
-    } = await req.json()
+    } :signinType = await req.json()
 
     //Check if the user has sent an empty values OR the inputs aren't valid
 
