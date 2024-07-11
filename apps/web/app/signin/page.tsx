@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-const formSchema = z.object({
+export const signinformSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -31,7 +31,7 @@ export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signinformSchema),
     defaultValues: {
       email: "",
       password: "",
