@@ -7,10 +7,11 @@ import { Label } from "@/components/ui/label"
 import axios from 'axios'
 import z from "zod"
 import {signinFormSchema, signinType } from '@repo/zodtypes/auth'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const SignupForm = () => {
-  // const navigator = useRouter()
+  const navigator = useRouter()
   const [formData, setFormData] = useState<signinType>({
     email: '',
     password: ''
@@ -45,13 +46,13 @@ const SignupForm = () => {
     }
     // if success, redirect to the dashboard
     else {
-      // navigator.push("/dashboard")
+      navigator.push("/dashboard")
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Signup</h2>
+      <h2 className="text-2xl font-bold mb-4">Signin</h2>
       <div className="mb-4">
         <Label htmlFor="email">Email</Label>
         <Input 
@@ -75,6 +76,7 @@ const SignupForm = () => {
         />
       </div>
       <Button type="submit" className="w-full">Signup</Button>
+      <h3 className="mt-2 text-sm text-left">Don't have a account yet? <Link href="signup" className="text-cyan-500">Create your account</Link></h3>
     </form>
   );
 };

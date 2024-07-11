@@ -12,7 +12,7 @@ export async function POST(req: NextRequest){
         email,
         password
     } : signupType = await req.json()
-
+    console.log(username, email, password)
     //Check if the user has sent an empty values OR the inputs aren't valid
 
     if (!(username || email || password) || !signupFormSchema.safeParse({username, email, password}).success){

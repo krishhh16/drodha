@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import axios from 'axios'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { signupFormSchema, signupType } from '@repo/zodtypes/auth';
 
 interface signupInputs extends signupType {
   confirmPassword: string
 }
+
 const SignupForm = () => {
   const navigator = useRouter()
   const [formData, setFormData] = useState<signupInputs>({
@@ -48,7 +49,7 @@ const SignupForm = () => {
       setError("Please put valid inputs in the input fields")
     }
     // send to the backend
-    const response = await axios.post('http://localhost:3000/api/signup')
+    const response = await axios.post('http://localhost:3000/api/signup', formData)
     // check if it was a success or not
     if (!response.data.success){
       setError(response.data.msg)
