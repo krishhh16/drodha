@@ -1,0 +1,38 @@
+'use client'
+import React, { useEffect, useState } from 'react'
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import Cookies from "js-cookie";
+
+function Navbar() {
+    const [authenticated, setIsAuthenticated] = useState(false)
+    useEffect(() => {
+        const token = Cookies.get("authToken");
+        if (token) {
+          setIsAuthenticated(true);
+        }
+      }, []);
+  return (
+    <div className="w-full h-[8vh] flex justify-between">
+      <div className="flex justify-evenly w-[40%] h-full p-2">
+        <div className="flex w-1/3 items-center">
+            <img className="w-10 h-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWtZgmQ0kSgVJpzCVvCMQfoafRXmfkcEhZcg&s" alt=""/>
+            <h1 className="text-white font-bold text-sm">CryptoExchange</h1>
+        </div>
+        <div className="flex justify-evenly items-center w-1/3">
+            <h1 className="text-xs font-bold text-white">Markets</h1>
+            <h1 className="text-xs font-bold text-zinc-500">Trade</h1>
+        </div>
+        <div id="search" className="w-1/3 flex items-center">
+            <Input type="search" className='bg-zinc-800'  placeholder="Search Markets"/>
+        </div>
+      </div>
+      <div className="p-4 flex justify-evenly w-[25%]">
+            <Button className="text-xs bg-green-800" variant="default">{authenticated ? "Check your account" :  "Sign up"} </Button>
+            <Button className="text-xs bg-blue-800" variant="default">{authenticated ?  "Exchange history" : "Sign In" }</Button>
+      </div>
+    </div>
+  )
+}
+
+export default Navbar
