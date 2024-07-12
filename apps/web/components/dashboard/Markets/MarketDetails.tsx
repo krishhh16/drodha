@@ -79,7 +79,7 @@ function MarketDetails() {
         return <MarketComp additionalStyles={card.additionalStyles} attribute={card.attribute} markets={card.markets}/>
     })
     return (
-        <div className="max-w-[70%] mx-auto my-4">
+        <div className="max-w-[75%] mx-auto my-4">
             <h1 className="text-white mb-3 font-bold text-[1.7vw]">
                 Markets
             </h1>
