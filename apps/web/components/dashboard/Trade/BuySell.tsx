@@ -49,9 +49,61 @@ function BuySell() {
 }
 
 function Market(authenticated : {authenticated: boolean}) {
+    const [priceQuantity, setPriceQuantity] = useState<number>(0)
+    const [bitcoinVal, setBitcoinVal] = useState<number>(0)
+    const vals = [{name: "Limit Price", value: "58733.1"},{name: "Limit Quantity", value: "-"},{name: "Order Vlaue", value: "-"}]
+    const valsMaps = vals.map((data, ix) => {
+        return (
+            <div key={ix} className="flex justify-between">
+                <h1 className="text-[0.7vw] text-slate-400 font-semibold">
+                    {data.name}
+                </h1>
+                <h1 className="text-[0.7vw] text-white font-semibold">
+                    {data.value}
+                </h1>
+            </div>
+        )
+    })
     return (
-        <div className="text-red-500">
-            Market
+        <div className="m-1">
+            <div className="flex items-center p-2 justify-between text-white">
+                <h1 className="text-[0.7vw] text-zinc-400">
+                    Available Balance
+                </h1>
+                <h1 className="text-[0.7vw]">
+                    {authenticated ? "100USDC" : "0.00USDC"}
+                </h1>
+            </div>
+            <div className="p-2">
+                <h1 className="text-slate-400 text-[0.7vw] mb-2">
+                    Order Value 
+                </h1>
+                <div onClick={() => {
+                    setPriceQuantity(1)
+                } }  className={`flex items-center rounded-lg border transition-all ease-linear duration-0 p-1 border-zinc-400/40 ${priceQuantity == 1 && "border-blue-600"} `}>
+                    <Input onChange={(e:any) => setBitcoinVal(e.target.value)}  value={`${bitcoinVal}`} className='border border-none text-white font-normal text-2xl text-right h-[5vh]' />
+                    <img className="w-5 mr-1 h-5" src="https://backpack.exchange/_next/image?url=%2Fcoins%2Fusdc.png&w=32&q=75" alt="usdc" />
+                </div>
+                    {
+                        authenticated ?
+                <Button className="w-full mt-4 h-[5vh] rounded-xl mb-4" variant="outline">
+                        
+                        Trade
+
+                </Button>
+                        :
+                <Button className="w-full h-[5vh] mb-4 rounded-xl" variant="outline">
+                    <Link href={"/signup"}>
+                        Sign up to trade
+                    </Link>
+                </Button>
+                    }
+                <div>
+                    {
+                       valsMaps
+                    }
+                </div>
+            </div>  
         </div>
     )
 }
@@ -61,8 +113,8 @@ function Limit(authenticated : {authenticated: boolean}) {
     const [bitcoinVal, setBitcoinVal] = useState<number>(57176)
     const [usdcVal, setUsdcVal] = useState<number>(0)
     return (
-        <div className="m-4">
-            <div className="flex items-center p-4 justify-between text-white">
+        <div className="m-1">
+            <div className="flex items-center p-2 justify-between text-white">
                 <h1 className="text-[0.7vw] text-zinc-400">
                     Available Balance
                 </h1>
@@ -70,7 +122,7 @@ function Limit(authenticated : {authenticated: boolean}) {
                     {authenticated ? "100USDC" : "0.00USDC"}
                 </h1>
             </div>
-            <div>
+            <div className="p-2">
                 <h1 className="text-slate-400 text-[0.7vw] mb-2">
                     Price
                 </h1>
