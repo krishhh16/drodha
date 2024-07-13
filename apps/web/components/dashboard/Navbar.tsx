@@ -24,7 +24,7 @@ function Navbar() {
             <h1 className="text-xs font-bold text-zinc-500">Trade</h1>
         </div>
         <div id="search" className="w-1/3 flex items-center">
-            <Input type="search" className='bg-zinc-800'  placeholder="Search Markets"/>
+            <Input type="search" className='bg-zinc-800 border-none rounded-xl h-[3.5vh]'   placeholder="Search Markets"/>
         </div>
       </div>
       <div className="p-4 flex justify-evenly w-[15%]">
