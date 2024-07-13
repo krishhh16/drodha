@@ -13,7 +13,7 @@ function Navbar() {
         }
       }, []);
   return (
-    <div className="w-full h-[8vh] flex justify-between">
+    <div className="w-full h-[8vh] flex justify-between border-b border-slate-200/20  ">
       <div className="flex justify-evenly w-[40%] h-full p-2">
         <div className="flex w-1/3 items-center">
             <img className="w-10 h-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWtZgmQ0kSgVJpzCVvCMQfoafRXmfkcEhZcg&s" alt=""/>
@@ -27,9 +27,9 @@ function Navbar() {
             <Input type="search" className='bg-zinc-800'  placeholder="Search Markets"/>
         </div>
       </div>
-      <div className="p-4 flex justify-evenly w-[25%]">
-            <Button className="text-xs bg-green-800" variant="default">{authenticated ? "Check your account" :  "Sign up"} </Button>
-            <Button className="text-xs bg-blue-800" variant="default">{authenticated ?  "Exchange history" : "Sign In" }</Button>
+      <div className="p-4 flex justify-evenly w-[15%]">
+            <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">{authenticated ? "Check your account" :  "Sign up"} </Button>
+            <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">{authenticated ?  "Exchange history" : "Sign In" }</Button>
       </div>
     </div>
   )
