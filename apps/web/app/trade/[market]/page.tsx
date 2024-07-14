@@ -9,7 +9,7 @@ function page() {
     return (
         <div>
             <Navbar/>
-            <div className="flex w-[100vw] h-screen">
+            <div className="flex w-[100vw] overflow-hidden">
                 <TradeInfo/>
                 <BuySell/>
             </div>
