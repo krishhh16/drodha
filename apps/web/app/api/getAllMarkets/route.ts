@@ -6,3 +6,15 @@ export async function GET(req: NextRequest){
 
     return NextResponse.json({markets})
 }
+
+export async function POST(req: NextRequest) {
+    const {crypto} : {crypto: string} = await req.json();
+
+    const cryptoDetails = await prisma.markets.findFirst({
+        where: {
+            sym: crypto
+        }
+    })
+
+    return NextResponse.json({cryptoDetails})
+}

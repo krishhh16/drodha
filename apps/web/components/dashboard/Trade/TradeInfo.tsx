@@ -1,12 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Orderbook from './orderbook'
+import axios from 'axios'
 
 function TradeInfo() {
     //@ts-ignore
     const [base, quote]= useParams().market.split("_")
-    const [baseVal, quoteVal] = [59969.1, 0]
+    const [baseQuoteVal, setBaseQuote] = useState({
+      base: 0,
+      quote: 0
+    })
+    const [info, setInfo] = useState()
     const [bookTrade, setBookTrade] = useState<"Book" | "Trade">("Book")
+
+    useEffect(() => {
+      (async () => {
+        const response = await axios.post('http://localhost:3000/api/getAllMarkets', {
+          crypto: base
+        })
+
+        setInfo(response.data.cryptoDetails)
+
+      })()
+    }, [])
+
   return (
     <div onClick={() => console.log(base, quote)} className="w-[80vw] h-full">
       <div className="h-[10vh] px-6 gap-10 flex items-center justify-left w-full border-y border-slate-400/30">
@@ -15,10 +32,10 @@ function TradeInfo() {
             </h1>
             <div>
               <h1 className='text-green-600'>
-                {baseVal}
+                {info?.price}
               </h1>
               <h1 className='text-white text-xs'>
-                ${baseVal}
+                ${info?.price}
               </h1>
             </div>
       </div>
