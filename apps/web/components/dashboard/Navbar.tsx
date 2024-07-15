@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Cookies from "js-cookie";
+import Link from 'next/link';
 
 function Navbar() {
     const [authenticated, setIsAuthenticated] = useState(false)
@@ -29,14 +30,14 @@ function Navbar() {
       </div>
       {
         authenticated ? 
-      <div className="p-4 flex justify-evenly w-[15%]">
+      <div className="p-4 flex justify-evenly w-[20%]">
             <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">View past trades </Button>
             <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Something</Button>
       </div>
         :
-        <div className="p-4 flex justify-evenly w-[15%]">
-            <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">Sign up</Button>
-            <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Sign in</Button>
+        <div className="p-4 flex justify-evenly w-[25%]">
+          <Link href="/signup">  <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">Sign up</Button></Link>
+          <Link href="/signin">        <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Sign in</Button> </Link>
       </div>
       }
     </div>

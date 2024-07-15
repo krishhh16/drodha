@@ -19,3 +19,14 @@ model User {
   email String @unique
   password String 
 }
+
+model Markets {
+  id Int @id @default(autoincrement())
+  name String @unique
+  price Int 
+  mCap String 
+  vol String
+  change String
+  icon String
+  sym String @unique
+}

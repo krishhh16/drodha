@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation"
-
+import { CryptoMarkets } from "./Markets";
 
 const CryptoTable = ({ cryptocurrencies }: any) => {
   const router = useRouter();
@@ -18,8 +18,8 @@ const CryptoTable = ({ cryptocurrencies }: any) => {
           </tr>
         </thead>  
         <tbody>
-          {cryptocurrencies.map((crypto: any) => (
-            <tr key={crypto.id}  onClick={() => router.push(`/trade/${crypto.symbol}_USDC`)} className="border-b border-gray-800 cursor-pointer hover:bg-[#45454918] bg-[#15141B]">
+          {cryptocurrencies?.map((crypto: any) => (
+            <tr key={crypto.id}  onClick={() => router.push(`/trade/${crypto.sym}_USDC`)} className="border-b border-gray-800 cursor-pointer hover:bg-[#45454918] bg-[#15141B]">
               <td className="py-4 flex items-center">
                 <img src={crypto.icon} className="w-8 h-8 object-contain mr-4"  alt={crypto.name} />
                 <div>
@@ -28,10 +28,10 @@ const CryptoTable = ({ cryptocurrencies }: any) => {
                 </div>
               </td>
               <td className="text-right">${crypto.price.toFixed(2)}</td>
-              <td className="text-right">${crypto.marketCap}</td>
-              <td className="text-right">${crypto.volume}</td>
-              <td className={`text-right ${crypto.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                {crypto.change.toFixed(2)}%
+              <td className="text-right">${crypto.mCap}</td>
+              <td className="text-right">${crypto.vol}</td>
+              <td className={`text-right ${crypto.change}`}>
+                {crypto.change}%
               </td>
               <td className="text-right"> 
                 {/* Replace with actual price chart component */}
