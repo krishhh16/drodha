@@ -27,10 +27,18 @@ function Navbar() {
             <Input type="search" className='bg-zinc-800 border-none rounded-xl h-[3.5vh]'  placeholder="Search Markets"/>
         </div>
       </div>
+      {
+        authenticated ? 
       <div className="p-4 flex justify-evenly w-[15%]">
-            <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">{authenticated ? "Check your account" :  "Sign up"} </Button>
-            <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">{authenticated ?  "Exchange history" : "Sign In" }</Button>
+            <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">View past trades </Button>
+            <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Something</Button>
       </div>
+        :
+        <div className="p-4 flex justify-evenly w-[15%]">
+            <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">Sign up</Button>
+            <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Sign in</Button>
+      </div>
+      }
     </div>
   )
 }

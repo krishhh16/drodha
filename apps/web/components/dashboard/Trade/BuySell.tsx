@@ -13,7 +13,7 @@ function BuySell() {
     useEffect(() => {
         const token = Cookies.get("authToken");
         if (token) {
-          setIsAuthenticated(true);
+          setIsAuthenticated(false);
         }
       }, []);
   return (
@@ -71,7 +71,7 @@ function Market(authenticated : {authenticated: boolean}) {
                     Available Balance
                 </h1>
                 <h1 className="text-[0.7vw]">
-                    {authenticated ? "100USDC" : "0.00USDC"}
+                    {authenticated.authenticated ? "100USDC" : "0.00USDC"}
                 </h1>
             </div>
             <div className="p-2">
@@ -85,7 +85,7 @@ function Market(authenticated : {authenticated: boolean}) {
                     <img className="w-5 mr-1 h-5" src="https://backpack.exchange/_next/image?url=%2Fcoins%2Fusdc.png&w=32&q=75" alt="usdc" />
                 </div>
                     {
-                        authenticated ?
+                        authenticated.authenticated ?
                 <Button className="w-full mt-4 h-[5vh] rounded-xl mb-4" variant="outline">
                         
                         Trade
@@ -119,7 +119,7 @@ function Limit(authenticated : {authenticated: boolean}) {
                     Available Balance
                 </h1>
                 <h1 className="text-[0.7vw]">
-                    {authenticated ? "100USDC" : "0.00USDC"}
+                    {authenticated.authenticated ? "100USDC" : "0.00USDC"}
                 </h1>
             </div>
             <div className="p-2">
@@ -145,7 +145,7 @@ function Limit(authenticated : {authenticated: boolean}) {
                 ≈ {bitcoinVal * usdcVal} USDC
                 </h1>
                     {
-                        authenticated ?
+                        authenticated.authenticated ?
                 <Button className="w-full mt-4 h-[5vh] rounded-xl" variant="outline">
                         
                         Trade

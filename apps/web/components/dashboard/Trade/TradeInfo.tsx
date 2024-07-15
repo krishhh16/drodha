@@ -38,10 +38,10 @@ function TradeInfo() {
           <div className="bg-black text-white p-4">
       <table className="w-full">
         <thead>
-          <tr className="text-xs">
-            <th className="text-left ">Price (USDC)</th>
-            <th className="text-center">Size (BTC)</th>
-            <th className="text-right">Total (BTC)</th>
+          <tr className="text-[0.6vw]">
+            <th className="text-left " >Price (USDC)</th>
+            <th className="text-center ">Size (BTC)</th>
+            <th className="text-right" >Total (BTC)</th>
           </tr>
         </thead>
           <Orderbook
