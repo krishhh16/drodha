@@ -72,90 +72,16 @@ function TradeInfo() {
             <th className="text-center ">Size (BTC)</th>
             <th className="text-right" >Total (BTC)</th>
           </tr>
-        </thead>
+        </thead>  
           <Orderbook
-          data= {[{
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "sell"
-          },
+          data= {[
         
         ]}
           />
 
-          <h1 className='text-red-500 text-sm font-bold my-4 text-left'>62,928.5</h1>
+          <h1 className='text-red-500 text-sm font-bold my-4 text-left'>Dummy Number</h1>
           <Orderbook
-          data= {[{
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },
-          {
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },{
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },{
-            price: 62989.9,
-            size: 0.45,
-            total: 82932,
-            type: "buy"
-          },
+          data= {[
         ]}
           />
       </table>
