@@ -26,17 +26,29 @@ function TradeInfo() {
 
   return (
     <div onClick={() => console.log(base, quote)} className="w-[80vw] h-full">
-      <div className="h-[10vh] px-6 gap-10 flex items-center justify-left w-full border-y border-slate-400/30">
+      <div className="h-[10vh] px-6 gap-10 flex items-center justify-left w-full border-y border-slate-400/30">\
+            <div className="relative mr-[-30px]">
+              <img src={info?.icon} className="w-6 top-0 right-4 absolute h-6 object-cover" alt="" />
+              <img className="top-0 w-6 h-6"  src="https://backpack.exchange/_next/image?url=%2Fcoins%2Fusdc.png&w=32&q=75" alt="" />
+            </div>
             <h1 className='text-white'>
               {base + "/" + quote}
             </h1>
             <div>
-              <h1 className='text-green-600'>
+              <h1 className='text-white'>
                 {info?.price}
               </h1>
               <h1 className='text-white text-xs'>
                 ${info?.price}
               </h1>
+            </div>
+            <div>
+              <h1 className="text-[0.7vw] text-slate-500">24H Change</h1>
+              <h1 className={`${info?.change.includes("-") ? "text-red-500": "text-green-500"} text-xs`}>{info?.change}</h1>
+            </div>
+            <div>
+              <h1 className="text-[0.7vw] text-slate-500">24H Volume(USDC)</h1>
+              <h1 className={`text-white text-xs`}>{info?.vol}</h1>
             </div>
       </div>
       <div className="flex w-full h-[80vh]">
