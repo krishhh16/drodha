@@ -35,9 +35,9 @@ function Navbar() {
             <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Something</Button>
       </div>
         :
-        <div className="p-4 flex justify-evenly w-[25%]">
-          <Link href="/signup">  <Button className="text-xs bg-green-800 bg-opacity-60 text-green-300" variant="default">Sign up</Button></Link>
-          <Link href="/signin">        <Button className="text-xs bg-blue-800 bg-opacity-40 text-blue-300" variant="default">Sign in</Button> </Link>
+        <div className="p-4 flex justify-evenly w-[15%]">
+          <Link href="/signup"><Button className="text-xs bg-green-800 bg-opacity-40 text-green-300" variant="default">Sign up</Button></Link>
+          <Link href="/signin"><Button className="text-xs bg-blue-800 bg-opacity-30 text-blue-300" variant="default">Sign in</Button> </Link>
       </div>
       }
     </div>

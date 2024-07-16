@@ -17,7 +17,7 @@ function BuySell() {
         }
       }, []);
   return (
-    <div className='w-[20vw] h-full border border-slate-200/10'>
+    <div className='w-[20vw] border border-slate-200/10'>
       <div className="flex w-full border-b border-slate-200/10 h-[8vh]">
         <h1 onClick={() => setTradeOff('Buy')} 
         className={`h-full text-sm ${buyOrSell != "Buy" && "hover:border-b-2"} flex justify-center items-center w-1/2 ${buyOrSell === "Buy" && "bg-opacity-30 bg-green-800 bordre-green-900"} text-green-300`}
@@ -112,6 +112,7 @@ function Limit(authenticated : {authenticated: boolean}) {
     const [priceQuantity, setPriceQuantity] = useState<number>(0)
     const [bitcoinVal, setBitcoinVal] = useState<number>(57176)
     const [usdcVal, setUsdcVal] = useState<number>(0)
+    const [check, setCheck] = useState<1 | 2 | 0>(0)
     return (
         <div className="m-1">
             <div className="flex items-center p-2 justify-between text-white">
@@ -160,13 +161,13 @@ function Limit(authenticated : {authenticated: boolean}) {
                     }
                 <div className="flex justify-between mt-4">
                     <div className="flex gap-1">
-                        <Input  value={`${usdcVal}`}  type='checkbox' className='w-4 h-4' />
+                        <Input onClick={() => setCheck(1)} value={`${usdcVal}`} checked={check == 1} type='checkbox' className='w-4 h-4' />
                         <h1 className="text-white text-xs">
                             Post Only
                         </h1>
                     </div>
                     <div className="flex gap-1">
-                        <Input value={`${usdcVal}`}  type='checkbox' className='w-4 h-4' />
+                        <Input value={`${usdcVal}`} onClick={() => setCheck(2)} checked={check == 2}  type='checkbox' className='w-4 h-4' />
                         <h1 className="text-white text-xs">
                             IOC
                         </h1>
