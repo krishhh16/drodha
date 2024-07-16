@@ -64,7 +64,7 @@ function TradeInfo() {
               Trades
             </h1>
           </div>
-          <div className="bg-black text-white p-4">
+          <div className="text-white p-4">
       <table className="w-full">
         <thead>
           <tr className="text-[0.6vw]">
